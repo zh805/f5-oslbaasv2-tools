@@ -11,42 +11,42 @@ testsuites:
     # loadbalancers per tenant.
   - loadbalancers: 1
     # listeners/pools/healthmonitors per loadbalancer.
-    resources: 100
+    resources: 1
     # members per pool.
-    members: 1
+    members: 200
 
-  - loadbalancers: 1
-    resources: 8
-    members: 64
-
-  - loadbalancers: 1
-    resources: 16
-    members: 32
-
-  - loadbalancers: 1
-    resources: 32
-    members: 16
-
-  - loadbalancers: 1
-    resources: 50
-    members: 10
-
-  - loadbalancers: 1
-    resources: 60
-    members: 8
-
-  - loadbalancers: 1
-    resources: 70
-    members: 7
-
-  - loadbalancers: 1
-    resources: 80
-    members: 6
-
-  - loadbalancers: 1
-    resources: 90
-    members: 5
-
-  - loadbalancers: 1
-    resources: 70
-    members: 1
+#  - loadbalancers: 1
+#    resources: 8
+#    members: 64
+#
+#  - loadbalancers: 1
+#    resources: 16
+#    members: 32
+#
+#  - loadbalancers: 1
+#    resources: 32
+#    members: 16
+#
+#  - loadbalancers: 1
+#    resources: 50
+#    members: 10
+#
+#  - loadbalancers: 1
+#    resources: 60
+#    members: 8
+#
+#  - loadbalancers: 1
+#    resources: 70
+#    members: 7
+#
+#  - loadbalancers: 1
+#    resources: 80
+#    members: 6
+#
+#  - loadbalancers: 1
+#    resources: 90
+#    members: 5
+#
+#  - loadbalancers: 1
+#    resources: 70
+#    members: 1

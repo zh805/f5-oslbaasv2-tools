@@ -131,6 +131,29 @@
         register: result
         when: mb_name not in mbs
 
+      - name: delete members
+        shell: |
+          source {{ openrc }}
+          set -e
+          /tmp/wait-for-lb-done.sh {{ lb_name }}
+          exists=`/tmp/if-exists-resource.sh members {{ mb_name }}`
+          if [ "$exists" = "true" ]; then
+            neutron --os-project-id {{ project_id.stdout }} lbaas-member-delete \
+              {{ mb_name }} {{ pl_name }}
+          fi
+        with_nested:
+          - "{{ range(0 , count_lb|int, 1) | list }}"
+          - "{{ range(0 , count_rc|int, 1) | list }}"
+          - "{{ range(0 , count_mb_per_pl|int, 1) | list }}"
+        loop_control:
+          label: "{{ mb_name }} delta:{{ result.delta | default('0:00:00.000') }}"
+        tags: member
+        vars:
+          lb_name: lb-{{ index_pj }}-{{ item[0] }}
+          pl_name: pl-{{ index_pj }}-{{ item[0] }}-{{ item[1] }}
+          mb_name: mb-{{ index_pj }}-{{ item[0] }}-{{ item[1] }}-{{ item[2] }}
+        register: result
+
       environment:
         NEUTRONDB_HOSTNAME: "{{ neutrondb_hostname }}"
         NEUTRONDB_PASSWORD: "{{ neutrondb_password }}"
